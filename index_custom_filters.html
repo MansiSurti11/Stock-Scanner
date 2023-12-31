@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Screener</title>
+</head>
+<body>
+
+<!-- Display filter values -->
+{% if min_price %}
+  <p>Minimum Price: {{ min_price }}</p>
+{% endif %}
+{% if max_price %}
+  <p>Maximum Price: {{ max_price }}</p>
+{% endif %}
+{% if min_volume %}
+  <p>Minimum Volume: {{ min_volume }}</p>
+{% endif %}
+
+<!-- Display stock information -->
+{% if stocks %}
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Company</th>
+        <th>Price</th>
+        <th>Volume</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stock in stocks %}
+        <tr>
+          <td>{{ stock.symbol }}</td>
+          <td>{{ stock.company }}</td>
+          <td>{{ stock.price }}</td>
+          <td>{{ stock.volume }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No stocks found.</p>
+{% endif %}
+
+</body>
+</html>

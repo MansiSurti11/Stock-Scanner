@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Database Integration for Stocks</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Database Integration for Stocks</h1>
+    
+    <form method="POST" action="{{ url_for('update_stocks') }}">
+        <label for="symbol">Symbol:</label>
+        <input type="text" id="symbol" name="symbol" required>
+    
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required>
+    
+        <button type="submit">Update Stocks</button>
+    </form>
+    
+    <ul>
+        {% for stock in stocks %}
+            <li>{{ stock.symbol }} - {{ stock.company }} - Price: ${{ stock.price }} - Volume: {{ stock.volume }}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <form method="post" action="/filter_stocks">
+        <label for="min_price">Minimum Price:</label>
+        <input type="number" name="min_price" id="min_price" step="0.01">
+
+        <label for="max_price">Maximum Price:</label>
+        <input type="number" name="max_price" id="max_price" step="0.01">
+
+        <label for="min_volume">Minimum Volume:</label>
+        <input type="number" name="min_volume" id="min_volume" step="1">
+
+        <button type="submit">Filter Stocks</button>
+
+</form>
+   </body>
+</html>

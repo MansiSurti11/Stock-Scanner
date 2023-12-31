@@ -1,0 +1,17 @@
+from flask import Flask
+from app import db
+
+# Create an instance of the Flask application
+app = Flask(__name__)
+
+# Use an environment variable for the database URL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///stocks.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Bind the Flask-SQLAlchemy extension to the application
+db.init_app(app)
+
+# Create a context for the application
+with app.app_context():
+    # Create the database tables
+    db.create_all()
